@@ -57,7 +57,7 @@ public class GuardianContext {
       props.setProperty("clientID", Long.toString(cid.toLong()));
       return props;
     } else {
-      Properties props = new Properties();
+      Properties props = new Properties(existing);
       if (callName != null) {
         props.setProperty("id", callName);
       }

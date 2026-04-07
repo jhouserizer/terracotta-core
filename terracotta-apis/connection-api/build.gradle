@@ -1,4 +1,3 @@
-
 /*
  * Copyright Terracotta, Inc.
  * Copyright IBM Corp. 2024, 2025
@@ -17,38 +16,52 @@
  */
 plugins {
     id 'java-library'
+    id 'org.asciidoctor.jvm.convert' version '3.3.2'
 }
 
-description = 'terracotta-core common classes'
+description = 'Terracotta Connection API'
 
 java {
     withSourcesJar()
+    withJavadocJar()
 }
 
 dependencies {
-  api project(':tc-messaging')
+    testImplementation "junit:junit:$junitVersion"
+}
 
-  implementation project(':build-data')
-  implementation project(':tripwire:plugin')
+asciidoctor {
+    sourceDir = file('src/docs/asciidoc')
+    outputDir = file("${buildDir}/docs/asciidoc")
+    
+    attributes = [
+        'toc': 'left',
+        'sectanchors': true,
+        'toclevels': 3,
+        'linkattrs': true,
+        'source-highlighter': 'coderay'
+    ]
+    
+    baseDirFollowsSourceDir()
+}
 
-  compileOnly "org.slf4j:slf4j-api:$slf4jVersion"
-  compileOnly project(":terracotta-apis:packaging-support")
+// Create docs assembly task
+task docsZip(type: Zip) {
+    dependsOn asciidoctor
+    archiveClassifier = 'docs'
+    from asciidoctor.outputDir
+}
 
-  testImplementation project(':test-common')
-  testImplementation "org.slf4j:slf4j-api:$slf4jVersion"
-  testImplementation project(":terracotta-apis:packaging-support")
-  testImplementation "junit:junit:$junitVersion"
-  testImplementation "org.mockito:mockito-core:$mockitoVersion"
-  testImplementation "org.hamcrest:hamcrest-all:$hamcrestVersion"
-  testImplementation 'org.terracotta:terracotta-utilities-port-chooser:0.0.19'
-  testImplementation "commons-io:commons-io:$commonsIOVersion"
+artifacts {
+    archives docsZip
 }
 
 // Exclude service provider files from copyright checks
 sourceSets.main.copyright.exclude '**/META-INF/services/**'
 sourceSets.test.copyright.exclude '**/META-INF/services/**'
 
-test {
-    systemProperty "tc.tests.info.temp-root", layout.buildDirectory.dir("tmp").get().toString()
+// Allow javadoc warnings/errors
+tasks.withType(Javadoc) {
+    options.addStringOption('Xdoclint:none', '-quiet')
+    failOnError = false
 }
-

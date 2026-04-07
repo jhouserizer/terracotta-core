@@ -1,4 +1,3 @@
-
 /*
  * Copyright Terracotta, Inc.
  * Copyright IBM Corp. 2024, 2025
@@ -19,10 +18,23 @@ plugins {
     id 'java-library'
 }
 
-description = 'terracotta-core server SPI'
+description = 'Terracotta Entity Server API'
 
-dependencies {
-  api project(':common-spi')
-  api project(":terracotta-apis:standard-cluster-services")
+java {
+    withSourcesJar()
+    withJavadocJar()
 }
 
+dependencies {
+    api project(':terracotta-apis:entity-common-api')
+}
+
+// Exclude service provider files from copyright checks
+sourceSets.main.copyright.exclude '**/META-INF/services/**'
+sourceSets.test.copyright.exclude '**/META-INF/services/**'
+
+// Allow javadoc warnings/errors
+tasks.withType(Javadoc) {
+    options.addStringOption('Xdoclint:none', '-quiet')
+    failOnError = false
+}

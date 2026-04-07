@@ -29,10 +29,10 @@ dependencies {
   api project(':common-spi')
 
   compileOnly "org.slf4j:slf4j-api:$slf4jVersion"
-  compileOnly "org.terracotta:entity-client-api:$terracottaApisVersion"
+  compileOnly project(":terracotta-apis:entity-client-api")
 
   testImplementation "org.slf4j:slf4j-api:$slf4jVersion"
-  testImplementation "org.terracotta:entity-client-api:$terracottaApisVersion"
+  testImplementation project(":terracotta-apis:entity-client-api")
   testImplementation "junit:junit:$junitVersion"
   testImplementation "org.mockito:mockito-core:$mockitoVersion"
 }

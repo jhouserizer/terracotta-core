@@ -23,7 +23,7 @@ description = 'terracotta-core configuration provider API'
 
 dependencies {
   compileOnly "org.slf4j:slf4j-api:$slf4jVersion"
-  compileOnly "org.terracotta:entity-server-api:$terracottaApisVersion"
+  compileOnly project(":terracotta-apis:entity-server-api")
   testImplementation "org.slf4j:slf4j-api:$slf4jVersion"
-  testImplementation "org.terracotta:entity-server-api:$terracottaApisVersion"
+  testImplementation project(":terracotta-apis:entity-server-api")
 }

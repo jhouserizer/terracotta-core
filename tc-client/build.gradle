@@ -27,12 +27,12 @@ java {
 
 dependencies {
     compileOnly "org.slf4j:slf4j-api:$slf4jVersion"
-    compileOnly "org.terracotta:entity-client-api:$terracottaApisVersion"
+    compileOnly project(":terracotta-apis:entity-client-api")
     api project(':common')
     implementation project(':management')
 
     testImplementation "org.slf4j:slf4j-api:$slf4jVersion"
-    testImplementation "org.terracotta:entity-client-api:$terracottaApisVersion"
+    testImplementation project(":terracotta-apis:entity-client-api")
     testImplementation "junit:junit:$junitVersion"
     testImplementation project(":test-common")
     testImplementation "org.hamcrest:hamcrest-all:$hamcrestVersion"

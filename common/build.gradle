@@ -32,11 +32,11 @@ dependencies {
   implementation project(':tripwire:plugin')
 
   compileOnly "org.slf4j:slf4j-api:$slf4jVersion"
-  compileOnly "org.terracotta:packaging-support:$terracottaApisVersion"
+  compileOnly project(":terracotta-apis:packaging-support")
 
   testImplementation project(':test-common')
   testImplementation "org.slf4j:slf4j-api:$slf4jVersion"
-  testImplementation "org.terracotta:packaging-support:$terracottaApisVersion"
+  testImplementation project(":terracotta-apis:packaging-support")
   testImplementation "junit:junit:$junitVersion"
   testImplementation "org.mockito:mockito-core:$mockitoVersion"
   testImplementation "org.hamcrest:hamcrest-all:$hamcrestVersion"

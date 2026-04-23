@@ -25,12 +25,8 @@ version = "$apiVersion"
 
 dependencies {
     contentsApi project(':common-api')
-    contentsApi ("org.terracotta:entity-client-api:$terracottaApisVersion") {
-        exclude group:'org.slf4j'
-    }
-    contentsApi ("org.terracotta:connection-api:$terracottaApisVersion") {
-        exclude group:'org.slf4j'
-    }
+    contentsApi project(':terracotta-apis:entity-client-api')
+    contentsApi project(':terracotta-apis:connection-api')
 }
 
 publishing {

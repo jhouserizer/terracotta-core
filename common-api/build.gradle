@@ -25,13 +25,9 @@ version = "$apiVersion"
 
 dependencies {
   compileOnlyApi "org.slf4j:slf4j-api:$slf4jVersion"
-  contentsApi ("org.terracotta:entity-common-api:$terracottaApisVersion") {
-        exclude group:'org.slf4j'
-    }
+  contentsApi project(':terracotta-apis:entity-common-api')
   contentsApi project(':common-spi')
-  contentsApi ("org.terracotta:packaging-support:$terracottaApisVersion") {
-        exclude group:'org.slf4j'
-    }
+  contentsApi project(':terracotta-apis:packaging-support')
 }
 
 publishing {

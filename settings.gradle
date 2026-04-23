@@ -38,6 +38,15 @@ include('client-api')
 include('common-api')
 include('server-api')
 
+// terracotta-apis modules
+include('terracotta-apis:connection-api')
+include('terracotta-apis:entity-common-api')
+include('terracotta-apis:entity-client-api')
+include('terracotta-apis:entity-server-api')
+include('terracotta-apis:monitoring-support')
+include('terracotta-apis:packaging-support')
+include('terracotta-apis:standard-cluster-services')
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {

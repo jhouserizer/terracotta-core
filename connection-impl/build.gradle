@@ -28,11 +28,11 @@ java {
 dependencies {
     compileOnly "org.slf4j:slf4j-api:$slf4jVersion"
     implementation project(':tc-client')
-    compileOnly "org.terracotta:entity-client-api:$terracottaApisVersion"
-    compileOnly "org.terracotta:connection-api:$terracottaApisVersion"
+    compileOnly project(":terracotta-apis:entity-client-api")
+    compileOnly project(":terracotta-apis:connection-api")
 
-    testImplementation "org.terracotta:entity-client-api:$terracottaApisVersion"
-    testImplementation "org.terracotta:connection-api:$terracottaApisVersion"
+    testImplementation project(":terracotta-apis:entity-client-api")
+    testImplementation project(":terracotta-apis:connection-api")
     testImplementation "org.mockito:mockito-core:$mockitoVersion"
     testImplementation "junit:junit:$junitVersion"
     testImplementation project(":test-common")

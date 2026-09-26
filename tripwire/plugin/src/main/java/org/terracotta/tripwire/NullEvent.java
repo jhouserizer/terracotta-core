@@ -1,4 +1,5 @@
 /*
+ *  Copyright Terracotta, Inc.
  * Copyright IBM Corp. 2024, 2025
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,5 +34,10 @@ class NullEvent implements org.terracotta.tripwire.Event {
 
   @Override
   public void setDescription(String description) {
+  }
+
+  @Override
+  public boolean shouldCommit() {
+    return false;
   }
 }

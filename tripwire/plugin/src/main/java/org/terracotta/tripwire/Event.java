@@ -1,4 +1,5 @@
 /*
+ *  Copyright Terracotta, Inc.
  * Copyright IBM Corp. 2024, 2025
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,4 +24,7 @@ public interface Event {
   void end();
   void commit();
   void setDescription(String description);
+  default boolean shouldCommit() {
+    return true;
+  }
 }

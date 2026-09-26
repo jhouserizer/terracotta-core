@@ -1,4 +1,5 @@
 /*
+ *  Copyright Terracotta, Inc.
  * Copyright IBM Corp. 2024, 2025
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -45,6 +46,10 @@ public class TripwireFactory {
   
   public static org.terracotta.tripwire.Event createStageEvent(String stage, Object debug) {
     return (ENABLED) ? new MonitoringEvent(stage, debug.toString()) : new NullEvent();
+  }
+
+  public static org.terracotta.tripwire.Event createStageEvent(String stage) {
+    return (ENABLED) ? new MonitoringEvent(stage) : new NullEvent();
   }
 
   public static org.terracotta.tripwire.Event createPrimeEvent(String name, byte[] uid, long session, long id) {

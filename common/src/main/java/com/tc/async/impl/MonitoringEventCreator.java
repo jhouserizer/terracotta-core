@@ -62,7 +62,7 @@ public class MonitoringEventCreator<EC> implements EventCreator<EC> {
   
   @Override
   public Event createEvent(EC event) {
-    MonitorStats stats = new MonitorStats(name, event.toString());
+    MonitorStats stats = new MonitorStats(name, event);
     PipelineMonitor running = CURRENT.get();
     if (running != null) {
       running.action(name, PipelineMonitor.Type.ENQUEUE, event);
@@ -115,10 +115,12 @@ public class MonitoringEventCreator<EC> implements EventCreator<EC> {
     private long run = 0;
     private long end = 0;
     private final org.terracotta.tripwire.Event event;
-    
-    public MonitorStats(String name, String debugging) {
+    private final EC context;
+
+    public MonitorStats(String name, EC event) {
       queue();
-      event = TripwireFactory.createStageEvent(name, debugging);
+      this.context = event;
+      this.event = TripwireFactory.createStageEvent(name);
     }
     
     void run() {
@@ -133,6 +135,9 @@ public class MonitoringEventCreator<EC> implements EventCreator<EC> {
     void end() {
       end = System.nanoTime();
       event.end();
+      if (event.shouldCommit()) {
+        event.setDescription(context.toString());
+      }
       event.commit();
     }
     

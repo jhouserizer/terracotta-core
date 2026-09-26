@@ -1,4 +1,5 @@
 /*
+ *  Copyright Terracotta, Inc.
  * Copyright IBM Corp. 2024, 2025
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,6 +33,11 @@ class MonitoringEvent extends Event implements org.terracotta.tripwire.Event {
   MonitoringEvent(String stage, String description) {
     this.stage = stage;
     this.description = description;
+  }
+
+  MonitoringEvent(String stage) {
+    this.stage = stage;
+    this.description = null;
   }
 
   @Override
